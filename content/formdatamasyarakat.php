@@ -47,7 +47,8 @@
                 <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
                     <h6 class="m-0 font-weight-bold text-primary">Tambah Data Masyarakat</h6>
                 </div>
-                <div style=" margin: 20px;" id="formContent">
+                <div style=" margin: 20px;">
+                    <form id="formContent">
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama" placeholder="Nama">
@@ -96,6 +97,7 @@
                     </div>
                     <!-- <button type="submit" id="submitBtn">Save</button> -->
                        <button type="submit">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -123,51 +125,28 @@
             let image1 = form.image1.files[0]
             let image2 = form.image2.files[0]
 
+            var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
-            formData.append('data', JSON.stringify({ nama, nik, penghasilan, rumah, tanggungan, lansia, ibuhamil, disability }));
-            formData.append('files.image', image1);
-            formData.append('files.image', image2);
+            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
+            formData.append('files.foto_tampak_depan', image1);
+            formData.append('files.foto_tampak_belakang', image2);
 
             try {
                 let res = await fetch('http://localhost:1337/api/data-masyarakats', {
                 method: 'POST',
                 headers: {
-                    // Kalau pakai token, aktifkan ini:
-                    'Authorization': 'Bearer YOUR_API_TOKEN'
+                    Authorization: 'Bearer ' + localStorage.getItem('token'),
                 },
                 body: formData
                 });
 
                 let result = await res.json();
-                console.log('Upload berhasil:', result);
-                alert('Produk berhasil diupload!');
+                alert('Data Masyarakat berhasil ditambahkan!');
+                window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
             } catch (err) {
-                console.error('Gagal upload:', err);
-                alert('Upload gagal!');
+                alert('Data Masyarakat gagal ditambahkan!');
             }
             });
-            // $('#submitBtn').click(function () {
-            //     var summernote = $('#summernote').val();
-            //     var judul = $('#judul').val();
-            //     var kategori = $('#kategori').val();
-            //     var idUser = <?= $_SESSION['user_id']; ?>;
-            //     let reqBody = {
-            //         "data": {
-            //             "judul": judul,
-            //             "isi": summernote,
-            //             "kategori": kategori,
-            //             "users_permissions_user": idUser
-            //         }
-            //     }
-  
-            //     $.post("http://localhost:1337/api/korans", reqBody, function(result){
-            //         alert("success add data")
-            //         window.location.href = "http://127.0.0.1/ummi/fe/Data Masyarakat.php";
-            //     }).fail(function (xhr, status, error) {
-            //         alert("gagal save data")
-            //     }); 
-            // });
-            
         });
     </script>
 

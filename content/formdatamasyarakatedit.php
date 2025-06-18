@@ -1,13 +1,12 @@
 <?php
 if (isset($_GET['id'])) {
-    $artikelId = $_GET['id'];
-    // Gunakan $artikelId untuk melakukan query atau mengirim request ke API
+    $dataMasyarakartId = $_GET['id'];
 } else {
-    echo "ID artikel tidak ditemukan!";
+    echo "ID tidak ditemukan!";
 }
 ?>
 
-<!-- Content Wrapper -->
+  <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
@@ -53,24 +52,62 @@ if (isset($_GET['id'])) {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
-                    <h6 class="m-0 font-weight-bold text-primary">Edit Artikel</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Tambah Data Masyarakat</h6>
                 </div>
-                <div style=" margin: 20px;" id="formContent">
+                <div style=" margin: 20px;">
+                    <form id="formContent">
+
                     <div class="mb-3">
-                        <label for="judul" class="form-label">Judul</label>
-                        <input type="text" class="form-control" id="judul" placeholder="Judul Artikel...">
+                        <label for="nama" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="nama" placeholder="Nama">
                     </div>
                     <div class="mb-3">
-                        <label for="kategori" class="form-label">Isi</label>
-                        <textarea class="form-control" id="summernote" rows="3"></textarea>
+                        <label for="nik" class="form-label">Nik</label>
+                        <input type="text" class="form-control" id="nik" placeholder="Nik">
                     </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="kategori">Kategori</label>
-                        <select class="form-control" id="kategori">
+                    <div class="mb-3">
+                        <label class="form-label" for="penghasilan">Penghasilan</label>
+                        <select class="form-control" id="penghasilan">
                         </select>
                     </div>
-                    <button type="submit" id="submitBtn">Save</button>
-
+                    <div class="mb-3">
+                        <label class="form-label" for="rumah">Rumah</label>
+                        <select class="form-control" id="rumah">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="tanggungan">Tanggungan</label>
+                        <select class="form-control" id="tanggungan">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="lansia">Lansia</label>
+                        <select class="form-control" id="lansia">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="ibuhamil">Ibu Hamil</label>
+                        <select class="form-control" id="ibuhamil">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="disability">Disability</label>
+                        <select class="form-control" id="disability">
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image1" class="form-label">Foto Tampak Depan</label>
+                        <div id="fototampakdepan"></div>
+                        <input class="form-control" type="file" name="image1">
+                    </div>
+                    <div class="mb-3">
+                        <label for="iamge2" class="form-label">Foto Tampak Belakang</label>
+                        <div id="fototampakbelakang"></div>
+                        <input class="form-control" type="file" name="image2">
+                    </div>
+                    <!-- <button type="submit" id="submitBtn">Save</button> -->
+                       <button type="submit">Save</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -78,183 +115,227 @@ if (isset($_GET['id'])) {
     </div>
     <!-- End of Main Content -->
     <script>
-        const artikelId = <?= json_encode($artikelId); ?>;
+        const dataMasyarakartId = <?= json_encode($dataMasyarakartId); ?>;
 
-        // Ambil data artikel berdasarkan ID
+        // Ambil data user berdasarkan ID
         $.ajax({
-            url: `http://localhost:1337/api/korans/${artikelId}?populate=*`,
+            url: `http://localhost:1337/api/data-masyarakats/${dataMasyarakartId}?populate=*`,
             method: 'GET',
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
             },
             success: function(response) {
-                const artikel = response.data;
-                console.log(artikel);
+                console.log('====================================');
+                console.log("responseresponse ", response);
+                console.log('====================================');
+                $('#nama').val(response.data.attributes.nama);
+                $('#nik').val(response.data.attributes.nik);
+                $('#fototampakdepan').append(
+                    `<image src="http://localhost:1337${response.data.attributes.foto_tampak_depan.data.attributes.url}" width=200 hright=200/>`
+                );
+                 $('#fototampakbelakang').append(
+                    `<image src="http://localhost:1337${response.data.attributes.foto_tampak_belakang.data.attributes.url}" width=200 hright=200/>`
+                );
+                
 
-
-                // Isi form dengan data artikel
-                $('#judul').val(artikel.judul);
-                $('#summernote').summernote('code', artikel.isi);
-                // $('#kategori').val(artikel.kategori.documentId);
-                const kategoriId = artikel.kategori.documentId;
-
-                // Load kategori dan pilih kategori sesuai ID
-                loadKategori(kategoriId);
+                $('#disability').append(
+                    `<option value="` + response.data.attributes.kriteria_disability.data.id + `">` + response.data.attributes.kriteria_disability.data.attributes.disabilitas + `</option>`
+                    ); 
+                $('#ibuhamil').append(
+                    `<option value="` + response.data.attributes.kriteria_ibu_hamil.data.id + `">` + response.data.attributes.kriteria_ibu_hamil.data.attributes.kriteria_ibu_hamil + `</option>`
+                    ); 
+                $('#lansia').append(
+                    `<option value="` + response.data.attributes.kriteria_lansia.data.id + `">` + response.data.attributes.kriteria_lansia.data.attributes.kriteria_lansia + `</option>`
+                    );
+                $('#penghasilan').append(
+                    `<option value="` + response.data.attributes.kriteria_penghasilan.data.id + `">` + response.data.attributes.kriteria_penghasilan.data.attributes.kriteria + `</option>`
+                    );
+                $('#rumah').append(
+                    `<option value="` + response.data.attributes.kriteria_rumah.data.id + `">` + response.data.attributes.kriteria_rumah.data.attributes.kondisi_rumah + `</option>`
+                    );
+                $('#tanggungan').append(
+                    `<option value="` + response.data.attributes.kriteria_tanggungan.data.id + `">` + response.data.attributes.kriteria_tanggungan.data.attributes.kriteria_tanggungan + `</option>`
+                    ); 
             },
             error: function(error) {
-                alert('Gagal mengambil data artikel!');
+                alert('Gagal mengambil data user!');
                 console.error(error);
             },
         });
-
-        function loadKategori(selectedId) {
-            $.ajax({
-                url: 'http://localhost:1337/api/kategoris/', // Ganti dengan URL server Anda
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    let resData = data.data;
-                    console.log("kategori", resData);
-
-                    $('#kategori').html(
-                        `<option value="">Pilih kategori...</option>`
-                    );
-                    $.each(resData, function(index, dt) {
-                        const isSelected = dt.documentId === selectedId ? 'selected' : '';
-                        $('#kategori').append(
-                            `<option value="${dt.documentId}" ${isSelected}>${dt.Kategori}</option>`
-                        );
-                    });
-                },
-                error: function(error) {
-                    alert('Gagal memuat data kategori!');
-                    console.error(error);
-                }
-            });
-        }
     </script>
-
 
     <script>
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                height: 300,
-                callbacks: {
-                    onImageUpload: function(files) {
-                        uploadImage(files[0]);
-                    },
-                    onMediaDelete: function($target) {
-                        deleteImage($target[0].src);
-                    }
-                }
-            });
+        $(document).ready(function () {
+            document.getElementById('formContent').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-            function uploadImage(file) {
-                let formData = new FormData();
-                formData.append("image", file);
+            const form = e.target;
+            const formData = new FormData();
 
-                $.ajax({
-                    url: 'content/summernote/upload_image.php', // PHP file untuk upload
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function(url) {
-                        console.log('====================================');
-                        console.log("targetFilePath ", url);
-                        console.log('====================================');
-                        $('#summernote').summernote('insertImage', url);
-                    },
-                    error: function() {
-                        alert('Upload image gagal.');
-                    }
+            // Ambil data dari form
+            let nama = form.nama.value
+            let nik = form.nik.value
+            let penghasilan = form.penghasilan.value
+            let rumah = form.rumah.value
+            let tanggungan = form.tanggungan.value
+            let lansia = form.lansia.value
+            let ibuhamil = form.ibuhamil.value
+            let disability = form.disability.value
+            // if(image1 != undefined){
+                let image1 = form.image1.files[0]
+                formData.append('files.foto_tampak_depan', image1);
+            // if(image2){
+                let image2 = form.image2.files[0]
+                formData.append('files.foto_tampak_belakang', image2);
+            // }
+
+            var idUser = <?= $_SESSION['user_id']; ?>;
+            // Tambahkan data ke FormData
+            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
+
+            try {
+                let res = await fetch('http://localhost:1337/api/data-masyarakats/'+dataMasyarakartId, {
+                method: 'PUT',
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token'),
+                },
+                body: formData
                 });
-            }
 
-            function deleteImage(imageUrl) {
-                $.ajax({
-                    url: 'content/summernote/delete_image.php',
-                    type: 'POST',
-                    data: {
-                        imageUrl: imageUrl
-                    },
-                    success: function(response) {
-                        console.log('Gambar berhasil dihapus:', response);
-                    },
-                    error: function() {
-                        alert('Gagal menghapus gambar.');
-                    }
-                });
+                let result = await res.json();
+                alert('Data Masyarakat berhasil ditambahkan!');
+                window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+            } catch (err) {
+                console.log('====================================');
+                console.log(err);
+                console.log('====================================');
+                alert('Data Masyarakat gagal ditambahkan!');
             }
-
-            $('#submitBtn').click(function() {
-                var summernote = $('#summernote').val();
-                var judul = $('#judul').val();
-                var kategori = $('#kategori').val();
-                var idUser = <?= $_SESSION['user_id']; ?>;
-                let reqBody = {
-                    "data": {
-                        "judul": judul,
-                        "isi": summernote,
-                        "kategori": kategori,
-                        "users_permissions_user": idUser,
-                        "status_koran": "Menunggu"
-                    }
-                }
-                if (artikelId) {
-                    // PUT request untuk update artikel
-                    $.ajax({
-                        url: `http://localhost:1337/api/korans/${artikelId}`,
-                        method: 'PUT',
-                        headers: {
-                            Authorization: 'Bearer ' + localStorage.getItem('token'),
-                            'Content-Type': 'application/json',
-                        },
-                        data: JSON.stringify(reqBody),
-                        success: function(result) {
-                            alert("Data berhasil diperbarui!");
-                            window.location.href = "http://127.0.0.1/ummi/fe/artikel.php";
-                        },
-                        error: function(xhr, status, error) {
-                            alert("Gagal memperbarui data!");
-                            console.error(xhr.responseText);
-                        }
-                    });
-                } else {
-                    alert("Artikel ID tidak ditemukan, tidak dapat memperbarui data!");
-                }
             });
-
         });
     </script>
 
-        $(document).ready(function() {
-            function getQueryParam(param) {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get(param);
-            }
+    
+<script>
+    $(document).ready(function() {
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
 
-            // Request data dari server
-            $.ajax({
-                url: 'http://localhost:1337/api/kategoris/', // Ganti dengan URL server Anda
-                method: 'GET',
-                dataType: 'json',
-                success: function(data) {
-                    let resData = data.data;
-                    $('#kategori').append(
-                        `<option value="">select kategori...</option>`
-                    );
-                    $.each(resData, function(index, dt) {
-                        // Looping data dan tambahkan ke elemen HTML
-                        $('#kategori').append(
-                            `<option value="` + dt.id + `">` + dt.Kategori + `</option>`
-                        );
-                    })
-                },
-                error: function(error) {
-                    alert('Gagal memuat data!');
-                    console.error(error);
-                }
-            });
+        // Request data dari server
+        $.ajax({
+            url: 'http://localhost:1337/api/kriteria-lansias', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#lansia').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.kriteria_lansia + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
         });
-    </script> -->
+
+         $.ajax({
+            url: 'http://localhost:1337/api/kriteria-penghasilans', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#penghasilan').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.kriteria + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+
+         $.ajax({
+            url: 'http://localhost:1337/api/kriteria-rumahs', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#rumah').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.kondisi_rumah + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+
+         $.ajax({
+            url: 'http://localhost:1337/api/kriteria-tanggungans', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#tanggungan').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.kriteria_tanggungan + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+
+         $.ajax({
+            url: 'http://localhost:1337/api/kriteria-ibu-hamils', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#ibuhamil').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.kriteria_ibu_hamil + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+
+         $.ajax({
+            url: 'http://localhost:1337/api/kriteria-disabilities', // Ganti dengan URL server Anda
+            method: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                let resData = data.data;
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#disability').append(
+                    `<option value="` + dt.id + `">` + dt.attributes.disabilitas + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+    });
+</script>

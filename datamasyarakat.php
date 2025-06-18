@@ -27,7 +27,7 @@ include 'template/footer.php';
                         <td style="text-align: center;">${item.attributes.kriteria_penghasilan.data.attributes.kriteria}</td>
                         <td style="text-align: center;">${item.attributes.kriteria_rumah.data.attributes.kondisi_rumah}</td>
                         <td style="text-align: center;">
-                            <a href="datauseredit.php?id=${item.id}" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="datamasyarakatedit.php?id=${item.id}" class="btn btn-warning btn-sm">Edit</a>
                             <button class="btn btn-danger btn-sm btn-delete" data-id="${item.id}">Hapus</button>
                         </td>
                     </tr>`
@@ -56,7 +56,7 @@ include 'template/footer.php';
       success: function (data, textStatus, jqXHR) {
           // Cek status HTTP untuk memastikan respons berhasil
           if (jqXHR.status === 200 || jqXHR.status === 204) {
-            alert('datauser berhasil dihapus!');
+            alert('Data Masyarakat berhasil dihapus!');
             location.reload(); // Refresh halaman setelah hapus
           } else {
             alert('Proses berhasil tetapi respons tidak terduga.');
