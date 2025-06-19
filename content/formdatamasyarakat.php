@@ -50,6 +50,11 @@
                 <div style=" margin: 20px;">
                     <form id="formContent">
                     <div class="mb-3">
+                        <label class="form-label" for="username">Username</label>
+                        <select class="form-control" id="username">
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
                         <input type="text" class="form-control" id="nama" placeholder="Nama">
                     </div>
@@ -121,13 +126,14 @@
             let tanggungan = form.tanggungan.value
             let lansia = form.lansia.value
             let ibuhamil = form.ibuhamil.value
+            let username = form.username.value
             let disability = form.disability.value
             let image1 = form.image1.files[0]
             let image2 = form.image2.files[0]
 
             var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
-            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
+            formData.append('data', JSON.stringify({ "users_permissions_user" : username, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
             formData.append('files.foto_tampak_depan', image1);
             formData.append('files.foto_tampak_belakang', image2);
 
@@ -157,6 +163,32 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
+
+         // Request data dari server
+        $.ajax({
+            url: 'http://localhost:1337/api/users', // Ganti dengan URL server Anda
+            method: 'GET',
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'), // Tambahkan Bearer Token
+            },
+            dataType: 'json',
+            success: function(data) {
+                let resData = data;
+                $('#username').append(
+                    `<option value="">Select Username...</option>`
+                    ); 
+                $.each(resData, function(i, dt) {
+                // Looping data dan tambahkan ke elemen HTML
+                    $('#username').append(
+                    `<option value="` + dt.id + `">` + dt.username + `</option>`
+                    ); 
+                })                   
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
 
         // Request data dari server
         $.ajax({

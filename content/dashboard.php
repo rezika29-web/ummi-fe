@@ -1,5 +1,7 @@
-
-        <!-- Content Wrapper -->
+<?php
+if(strtolower($_SESSION['status']) != "masyarakat" ){
+?>
+    <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
@@ -390,3 +392,166 @@
 
         </div>
         <!-- End of Content Wrapper -->
+<?php
+}else{
+?>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+                <div class="topbar-divider d-none d-sm-block"></div>
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $_SESSION['username']; ?></span>
+                        <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                        aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="profile.php">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-12 col-lg-6">
+                    <!-- Card Header - Dropdown -->
+                    <div class="card shadow mb-4">
+                         <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
+                            <h6 class="m-0 font-weight-bold text-primary">Data Pribadi</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="nik" class="form-label">Nik</label>
+                                    <input type="text" readonly class="form-control" id="nik">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" readonly class="form-control" id="nama">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="penghasilan" class="form-label">Penghasilan</label>
+                                    <input type="text" readonly class="form-control" id="penghasilan">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="rumah" class="form-label">Rumah</label>
+                                    <input type="text" readonly class="form-control" id="rumah">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="tanggungan" class="form-label">Tanggungan</label>
+                                    <input type="text" readonly class="form-control" id="tanggungan">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="lansia" class="form-label">Lansia</label>
+                                    <input type="text" readonly class="form-control" id="lansia">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="ibuhamil" class="form-label">Ibu Hamil</label>
+                                    <input type="text" readonly class="form-control" id="ibuhamil">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="disability" class="form-label">Disability</label>
+                                    <input type="text" readonly class="form-control" id="disability">
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="disability" class="form-label">Foto Tampak Depan</label>
+                                    <div id="fototampakdepan"></div>
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="disability" class="form-label">Foto Tampak Belakang</label>
+                                    <div id="fototampakbelakang"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Row -->
+        </div>
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>Copyright &copy; Your Website 2021</span>
+            </div>
+        </div>
+    </footer>
+    <!-- End of Footer -->
+
+</div>
+
+<!-- End of Content Wrapper -->
+<script>
+    var idUser = <?= $_SESSION['user_id']; ?>;
+    // Ambil data user berdasarkan ID
+    $.ajax({
+        url: `http://localhost:1337/api/data-masyarakats?populate=*&filters[users_permissions_user][id][$contains]=${idUser}`,
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        success: function(response) {
+            console.log('====================================');
+            console.log("response.data.attributes. ", response.data[0]);
+            console.log('====================================');
+            $('#nama').val(response.data[0].attributes.nama);
+            $('#nik').val(response.data[0].attributes.nik);
+            $('#penghasilan').val(response.data[0].attributes.kriteria_penghasilan.data.attributes.kriteria);
+            $('#rumah').val(response.data[0].attributes.kriteria_rumah.data.attributes.kondisi_rumah);
+            $('#tanggungan').val(response.data[0].attributes.kriteria_tanggungan.data.attributes.kriteria_tanggungan);
+            $('#lansia').val(response.data[0].attributes.kriteria_lansia.data.attributes.kriteria_lansia);
+            $('#ibuhamil').val(response.data[0].attributes.kriteria_ibu_hamil.data.attributes.kriteria_ibu_hamil);
+            $('#disability').val(response.data[0].attributes.kriteria_disability.data.attributes.disabilitas);
+            
+            $('#fototampakdepan').append(
+                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_depan.data.attributes.url}" width=200 hright=200/>`
+            );
+                $('#fototampakbelakang').append(
+                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_belakang.data.attributes.url}" width=200 hright=200/>`
+            );
+        },
+        error: function(error) {
+            alert('Gagal mengambil data user!');
+            console.error(error);
+        },
+    });
+</script>
+<?php
+}
+?>

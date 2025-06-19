@@ -52,7 +52,7 @@ if (isset($_GET['id'])) {
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
-                    <h6 class="m-0 font-weight-bold text-primary">Tambah Data Masyarakat</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Edit Data Masyarakat</h6>
                 </div>
                 <div style=" margin: 20px;">
                     <form id="formContent">
@@ -203,13 +203,13 @@ if (isset($_GET['id'])) {
                 });
 
                 let result = await res.json();
-                alert('Data Masyarakat berhasil ditambahkan!');
+                alert('Data Masyarakat berhasil diupdate!');
                 window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
             } catch (err) {
                 console.log('====================================');
                 console.log(err);
                 console.log('====================================');
-                alert('Data Masyarakat gagal ditambahkan!');
+                alert('Data Masyarakat gagal diupdate!');
             }
             });
         });

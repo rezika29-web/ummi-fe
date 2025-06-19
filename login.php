@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['user_id'])) {
     $_SESSION['message'] = "Anda sudah login";
-    header("Location: index.php");
+    header("Location: dashboard.php");
     exit();
 }
 ?>
