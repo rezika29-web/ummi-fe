@@ -94,11 +94,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="image1" class="form-label">Foto Tampak Depan</label>
-                        <input class="form-control" type="file" name="image1" required>
+                        <input class="form-control" type="file" name="image1">
                     </div>
                     <div class="mb-3">
                         <label for="iamge2" class="form-label">Foto Tampak Belakang</label>
-                        <input class="form-control" type="file" name="image2" required>
+                        <input class="form-control" type="file" name="image2">
                     </div>
                     <!-- <button type="submit" id="submitBtn">Save</button> -->
                        <button type="submit">Save</button>
@@ -148,7 +148,7 @@
 
                 let result = await res.json();
                 alert('Data Masyarakat berhasil ditambahkan!');
-                window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
             } catch (err) {
                 alert('Data Masyarakat gagal ditambahkan!');
             }

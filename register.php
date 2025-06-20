@@ -91,7 +91,7 @@
                 $.post("http://localhost:1337/api/auth/local/register", reqBody, function(result){
                     $('#registerMessage').text("success register");
                     setTimeout(() => {
-                        window.location.href = "http://127.0.0.1/ummi/fe/";
+                        window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/";
                     }, 2000);
                 }).fail(function (xhr, status, error) {
                     // Callback gagal
