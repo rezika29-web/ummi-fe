@@ -94,11 +94,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="image1" class="form-label">Foto Tampak Depan</label>
-                        <input class="form-control" type="file" name="image1" required>
+                        <input class="form-control" type="file" name="image1">
                     </div>
                     <div class="mb-3">
                         <label for="iamge2" class="form-label">Foto Tampak Belakang</label>
-                        <input class="form-control" type="file" name="image2" required>
+                        <input class="form-control" type="file" name="image2">
                     </div>
                     <!-- <button type="submit" id="submitBtn">Save</button> -->
                        <button type="submit">Save</button>
