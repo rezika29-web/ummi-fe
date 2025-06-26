@@ -52,6 +52,7 @@
                          <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
                             <h6 class="m-0 font-weight-bold text-primary">Status</h6>
                         </div>
+                        <div style="text-align: center; font-size: 30px;" id="statusUser"></div>
                     </div>
                 </div>
             </div>
@@ -75,3 +76,34 @@
 
 </div>
 
+<script>
+    var idUser = <?= $_SESSION['user_id']; ?>;
+    // Ambil data user berdasarkan ID
+    $.ajax({
+        url: `http://localhost:1337/api/data-masyarakats?populate=*&filters[users_permissions_user][id][$contains]=${idUser}`,
+        method: 'GET',
+        headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
+        success: function(response) {
+            $.ajax({
+                url: `http://localhost:1337/api/data-perengkingans?populate=*&filters[data_masyarakat][id]=${response.data[0].id}`,
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token'),
+                },
+                success: function(response) {
+                    $('#statusUser').append(response.data[0].attributes.status.toUpperCase());
+                },
+                error: function(error) {
+                    alert('Gagal mengambil data user!');
+                    console.error(error);
+                },
+            });
+        },
+        error: function(error) {
+            alert('Gagal mengambil data user!');
+            console.error(error);
+        },
+    });
+</script>
