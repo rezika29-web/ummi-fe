@@ -10,7 +10,7 @@
   <div class="header">
     <div class="left">Sistem Informasi</div>
     <div class="right">
-      <button class="login-btn">Login</button>
+      <button class="login-btn"><a class="small" href="login.php" style="text-decoration: none; color: white">LogIn</a></button>
     </div>
   </div>
 
