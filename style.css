@@ -1,0 +1,59 @@
+/* Gaya umum */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/001/335/135/small_2x/abstract-dynamic-blue-background-free-vector.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, sans-serif;
+  color: white;
+  position: relative;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.left {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.right .login-btn {
+  padding: 8px 16px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.right .login-btn:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+/* Welcome Text */
+.welcome {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.welcome h1 {
+  font-size: 48px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.6);
+}
