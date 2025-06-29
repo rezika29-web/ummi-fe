@@ -1,0 +1,48 @@
+
+<script>
+    $(document).ready(function() {
+        // Request data dari server
+        $.ajax({
+            url: 'http://localhost:1337/api/data-masyarakats?populate=*', // URL API Anda
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'), // Tambahkan Bearer Token
+            },
+            success: function(response) {
+                let minpenghasilan;
+                let fixMinPenghasilan = 0;
+                let minKondRumah;
+                let fixminKondRumah = 0;
+                let maxkriteriaTanggungan;
+                let fixMaxkriteriaTanggungan = 0;
+                let maxLansia;
+                let fixmaxLansia = 0;
+                let maxIbuHamil;
+                let fixmaxIbuHamil = 0;
+                let maxdisaility;
+                let fixmaxdisaility = 0;
+                
+                // let c;
+                for (let i = 0; i < response.data.length; i++) {  
+                    minpenghasilan = response.data[i].attributes.kriteria_penghasilan.data.attributes.nilai 
+                    fixMinPenghasilan = fixMinPenghasilan == 0 ? minpenghasilan : ( fixMinPenghasilan < minpenghasilan ? fixMinPenghasilan : minpenghasilan );
+                    minKondRumah = response.data[i].attributes.kriteria_rumah.data.attributes.nilai 
+                    fixminKondRumah = fixminKondRumah == 0 ? minKondRumah : ( fixminKondRumah < minKondRumah ? fixminKondRumah : minKondRumah );
+                    maxkriteriaTanggungan = response.data[i].attributes.kriteria_tanggungan.data.attributes.nilai 
+                    fixMaxkriteriaTanggungan = fixMaxkriteriaTanggungan == 0 ? maxkriteriaTanggungan : ( fixMaxkriteriaTanggungan > maxkriteriaTanggungan ? fixMaxkriteriaTanggungan : maxkriteriaTanggungan );
+                    maxLansia = response.data[i].attributes.kriteria_lansia.data.attributes.nilai 
+                    fixmaxLansia = fixmaxLansia == 0 ? maxLansia : ( fixmaxLansia > maxLansia ? fixmaxLansia : maxLansia );
+                    maxIbuHamil = response.data[i].attributes.kriteria_ibu_hamil.data?.attributes.nilai 
+                    fixmaxIbuHamil= fixmaxIbuHamil == 0 ? maxIbuHamil : ( fixmaxIbuHamil > maxIbuHamil ? fixmaxIbuHamil : maxIbuHamil );
+                    maxdisaility = response.data[i].attributes.kriteria_disability.data.attributes.nilai 
+                    fixmaxdisaility = fixmaxdisaility == 0 ? maxdisaility : ( fixmaxdisaility > maxdisaility ? fixmaxdisaility : maxdisaility );
+                }
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+    });
+</script>
