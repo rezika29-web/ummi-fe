@@ -56,7 +56,7 @@ if (!isset($_SESSION['user_id'])) {
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://127.0.0.1/ummi/fe/dashboard.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="http://127.0.0.1/Project/ummi/ummi-fe/dashboard.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -71,7 +71,7 @@ if (!isset($_SESSION['user_id'])) {
             ?>
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="http://127.0.0.1/ummi/fe">
+                <a class="nav-link" href="http://127.0.0.1/Project/ummi/ummi-fe">
                     <i class="fas fa-fw fa-home"></i>
                     <span>Home</span></a>
             </li>

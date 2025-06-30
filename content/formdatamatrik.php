@@ -124,7 +124,7 @@
 
             let result = await res.json();
             alert('Data matrik berhasil ditambahkan!');
-            window.location.href = "http://localhost/ummi/fe/datamatrik.php";
+            window.location.href = "http://localhost/Project/ummi/ummi-fe/datamatrik.php";
         } catch (err) {
             alert('Data matrik gagal ditambahkan!');
         }

@@ -132,7 +132,7 @@
 
             let result = await res.json();
             alert('Data perengkingan berhasil ditambahkan!');
-            window.location.href = "http://localhost/ummi/fe/dataperengkingan.php";
+            window.location.href = "http://localhost/Project/ummi/ummi-fe/dataperengkingan.php";
         } catch (err) {
             alert('Data perengkingan gagal ditambahkan!');
         }
