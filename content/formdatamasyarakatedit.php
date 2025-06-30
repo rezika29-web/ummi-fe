@@ -56,6 +56,8 @@ if (isset($_GET['id'])) {
                 </div>
                 <div style=" margin: 20px;">
                     <form id="formContent">
+                        
+                    <input type="text" class="form-control" id="idmasyarakat" placeholder="idmasyarakat" hidden>
 
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
@@ -125,13 +127,8 @@ if (isset($_GET['id'])) {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
             },
             success: function(response) {
-                console.log('====================================');
-                console.log("responseresponse ", response);
-                console.log('====================================');
-                console.log('====================================');
-                console.log("response.data.attributes.kriteria_disability.data.id ", response.data.attributes.kriteria_disability.data.id);
-                console.log('====================================');
                 $('#nama').val(response.data.attributes.nama);
+                $('#idmasyarakat').val(response.data.attributes.users_permissions_user.data.id);
                 $('#nik').val(response.data.attributes.nik);
                 $('#fototampakdepan').append(
                     `<image src="http://localhost:1337${response.data.attributes?.foto_tampak_depan?.data?.attributes?.url}" width=200 hright=200/>`
@@ -186,6 +183,7 @@ if (isset($_GET['id'])) {
             let lansia = form.lansia.value
             let ibuhamil = form.ibuhamil.value
             let disability = form.disability.value
+            let idmasyarakat = form.idmasyarakat.value
             // if(image1 != undefined){
                 let image1 = form.image1.files[0]
                 formData.append('files.foto_tampak_depan', image1);
@@ -194,9 +192,8 @@ if (isset($_GET['id'])) {
                 formData.append('files.foto_tampak_belakang', image2);
             // }
 
-            var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
-            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibu_hamil": ibuhamil, "kriteria_disability": disability }));
+            formData.append('data', JSON.stringify({ "users_permissions_user" : idmasyarakat, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibu_hamil": ibuhamil, "kriteria_disability": disability }));
 
             try {
                 let res = await fetch('http://localhost:1337/api/data-masyarakats/'+dataMasyarakartId, {
