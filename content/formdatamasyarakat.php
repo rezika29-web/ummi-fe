@@ -133,7 +133,7 @@
 
             var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
-            formData.append('data', JSON.stringify({ "users_permissions_user" : username, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
+            formData.append('data', JSON.stringify({ "users_permissions_user" : username, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibu_hamil": ibuhamil, "kriteria_disability": disability }));
             formData.append('files.foto_tampak_depan', image1);
             formData.append('files.foto_tampak_belakang', image2);
 
