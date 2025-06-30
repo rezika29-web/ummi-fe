@@ -191,7 +191,7 @@ if (isset($_GET['id'])) {
 
             var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
-            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibuhamil": ibuhamil, "kriteria_disability": disability }));
+            formData.append('data', JSON.stringify({ "users_permissions_user" : idUser, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibu_hamil": ibuhamil, "kriteria_disability": disability }));
 
             try {
                 let res = await fetch('http://localhost:1337/api/data-masyarakats/'+dataMasyarakartId, {
