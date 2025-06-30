@@ -128,21 +128,26 @@ if (isset($_GET['id'])) {
                 console.log('====================================');
                 console.log("responseresponse ", response);
                 console.log('====================================');
+                console.log('====================================');
+                console.log("response.data.attributes.kriteria_disability.data.id ", response.data.attributes.kriteria_disability.data.id);
+                console.log('====================================');
                 $('#nama').val(response.data.attributes.nama);
                 $('#nik').val(response.data.attributes.nik);
                 $('#fototampakdepan').append(
-                    `<image src="http://localhost:1337${response.data.attributes.foto_tampak_depan.data.attributes.url}" width=200 hright=200/>`
+                    `<image src="http://localhost:1337${response.data.attributes?.foto_tampak_depan?.data?.attributes?.url}" width=200 hright=200/>`
                 );
                  $('#fototampakbelakang').append(
-                    `<image src="http://localhost:1337${response.data.attributes.foto_tampak_belakang.data.attributes.url}" width=200 hright=200/>`
+                    `<image src="http://localhost:1337${response.data.attributes?.foto_tampak_belakang?.data?.attributes?.url}" width=200 hright=200/>`
                 );
-                
 
+                console.log('====================================');
+                console.log("response.data.attributes.kriteria_disability.data.id ", response.data.attributes.kriteria_disability.data.id);
+                console.log('====================================');
                 $('#disability').append(
                     `<option value="` + response.data.attributes.kriteria_disability.data.id + `">` + response.data.attributes.kriteria_disability.data.attributes.disabilitas + `</option>`
                     ); 
                 $('#ibuhamil').append(
-                    `<option value="` + response.data.attributes.kriteria_ibu_hamil.data.id + `">` + response.data.attributes.kriteria_ibu_hamil.data.attributes.kriteria_ibu_hamil + `</option>`
+                    `<option value="` + response.data.attributes?.kriteria_ibu_hamil?.data?.id + `">` + response.data.attributes?.kriteria_ibu_hamil?.data?.attributes?.kriteria_ibu_hamil + `</option>`
                     ); 
                 $('#lansia').append(
                     `<option value="` + response.data.attributes.kriteria_lansia.data.id + `">` + response.data.attributes.kriteria_lansia.data.attributes.kriteria_lansia + `</option>`
