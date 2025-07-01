@@ -90,11 +90,6 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="fas fa-fw fa-user"></i>
                     <span>Data Normalisasi</span></a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="kriteria.php">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Kriteria</span></a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <li class="nav-item">
