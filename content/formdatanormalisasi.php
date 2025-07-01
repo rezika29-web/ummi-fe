@@ -153,7 +153,6 @@
             });
 
             let result = await res.json();
-            
             const formDataMatrik = new FormData();
             c1 = minPenghasilan / c1;
             c2 = minRumah / c2;
@@ -264,16 +263,13 @@
             dataType: 'json',
             success: function(data) {
                 let resData = data;
-                console.log('====================================');
-                console.log("resDataresDataresData ", resData);
-                console.log('====================================');
                 $('#username').append(
                     `<option value="">Select Username...</option>`
                     ); 
                 $.each(resData.data, function(i, dt) {
                 // Looping data dan tambahkan ke elemen HTML
                     $('#username').append(
-                    `<option value="` + dt.id + `">` + dt.attributes.nama + `</option>`
+                    `<option value="` + dt.id + `">` + dt.attributes.nama + " - " + dt.attributes.nama +`</option>`
                     ); 
                 })                   
             },
