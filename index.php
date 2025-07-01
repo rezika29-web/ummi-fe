@@ -11,11 +11,11 @@
 <body>
   <div class="header">
     <div style="display: flex; justify-content: center; align-items: center;">
-      <img src="image/logo.png" width="50" height="50" />
+      <img src="image/logo.png" width="170" height="100" />
       <div class="left" style="margin-left: 10px;">Sistem Informasi</div>
     </div>
     <div class="right">
-      <button class="login-btn"><a class="small" href="login.php" style="text-decoration: none; color: white">LogIn</a></button>
+      <button class="login-btn"><a class="medium" href="login.php" style="text-decoration: none; color: white">LogIn</a></button>
     </div>
   </div>
 
