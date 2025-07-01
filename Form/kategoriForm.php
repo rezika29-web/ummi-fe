@@ -107,7 +107,7 @@
                 $.post("http://localhost:1337/api/kategoris", reqBody, function(result){
                     $('#kategoriMessage').text("success tambah kategori");
                     setTimeout(() => {
-                        window.location.href = "http://127.0.0.1/ummi/fe/kategori.php";
+                        window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/kategori.php";
                     }, 2000);
                 }).fail(function (xhr, status, error) {
                     // Callback gagal

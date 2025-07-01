@@ -118,11 +118,11 @@ if (isset($_SESSION['user_id'])) {
 
                         if(result.user.status.toUpperCase() == "MASYARAKAT" ){
                                 setTimeout(() => {
-                                    window.location.href = "http://localhost/ummi/fe/dashboard.php";
+                                    window.location.href = "http://localhost/Project/ummi/ummi-fe/dashboard.php";
                                 }, 2000);
                             }else{
                                 setTimeout(() => {
-                                    window.location.href = "http://localhost/ummi/fe/datapribadi.php";
+                                    window.location.href = "http://localhost/Project/ummi/ummi-fe/datapribadi.php";
                                 }, 2000);
                             }
                     });

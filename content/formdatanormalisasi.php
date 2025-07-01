@@ -190,7 +190,7 @@
                     });
 
                     alert('Data Normalisasi berhasil ditambahkan!');
-                    window.location.href = "http://localhost/ummi/fe/datanormalisasi.php";
+                    window.location.href = "http://localhost/Project/ummi/ummi-fe/datanormalisasi.php";
 
                 } catch (err) {
                     alert('Data matrik gagal ditambahkan!');

@@ -213,7 +213,7 @@ if (isset($_GET['id'])) {
                         data: JSON.stringify(reqBody),
                         success: function(result) {
                             alert("Data berhasil diperbarui!");
-                            window.location.href = "http://127.0.0.1/ummi/fe/artikel.php";
+                            window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/artikel.php";
                         },
                         error: function(xhr, status, error) {
                             alert("Gagal memperbarui data!");

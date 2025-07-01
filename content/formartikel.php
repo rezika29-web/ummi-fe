@@ -136,7 +136,7 @@
   
                 $.post("http://localhost:1337/api/korans", reqBody, function(result){
                     alert("success add data")
-                    window.location.href = "http://127.0.0.1/ummi/fe/artikel.php";
+                    window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/artikel.php";
                 }).fail(function (xhr, status, error) {
                     alert("gagal save data")
                 }); 

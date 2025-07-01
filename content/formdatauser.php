@@ -87,7 +87,7 @@
   
                 $.post("http://localhost:1337/api/users", reqBody, function(result){
                     alert("success add data")
-                    window.location.href = "http://127.0.0.1/ummi/fe/datauser.php";
+                    window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/datauser.php";
                 }).fail(function (xhr, status, error) {
                     alert("gagal save data")
                 }); 

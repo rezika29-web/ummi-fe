@@ -148,7 +148,7 @@
 
                 let result = await res.json();
                 alert('Data Masyarakat berhasil ditambahkan!');
-                window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
             } catch (err) {
                 alert('Data Masyarakat gagal ditambahkan!');
             }

@@ -172,7 +172,7 @@
 
                         // Redirect setelah beberapa detik
                         setTimeout(() => {
-                            window.location.href = "http://127.0.0.1/ummi/fe/logout.php";
+                            window.location.href = "http://127.0.0.1/Project/ummi/ummi-fe/logout.php";
                         }, 2000);
                     },
                     error: function(xhr, status, error) {

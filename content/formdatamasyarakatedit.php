@@ -206,7 +206,7 @@ if (isset($_GET['id'])) {
 
                 let result = await res.json();
                 alert('Data Masyarakat berhasil diupdate!');
-                window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
             } catch (err) {
                 console.log('====================================');
                 console.log(err);
