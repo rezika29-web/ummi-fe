@@ -269,7 +269,7 @@
                 $.each(resData.data, function(i, dt) {
                 // Looping data dan tambahkan ke elemen HTML
                     $('#username').append(
-                    `<option value="` + dt.id + `">` + dt.attributes.nama + " - " + dt.attributes.nama +`</option>`
+                    `<option value="` + dt.id + `">` + dt.attributes.nama + " - " + dt.attributes.nik +`</option>`
                     ); 
                 })                   
             },
