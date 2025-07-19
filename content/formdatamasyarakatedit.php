@@ -267,7 +267,7 @@ if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
                     window.location.href = "http://localhost/ummi/fe/dashboard.php";
                 }else{
                     window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
-                }
+                }            
             } catch (err) {
                 alert('Data Masyarakat gagal diupdate!');
             }

@@ -3,7 +3,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $imageUrl = $_POST['imageUrl'];
 
     // Path file di server
-    $filePath = str_replace('http://127.0.0.1/ummi/fe/', '../../../', $imageUrl); // Sesuaikan domain Anda
+    $filePath = str_replace('http://127.0.0.1/Project/ummi/ummi-fe/', '../../../', $imageUrl); // Sesuaikan domain Anda
     if (file_exists($filePath)) {
         if (unlink($filePath)) {
             echo "Gambar berhasil dihapus.";
