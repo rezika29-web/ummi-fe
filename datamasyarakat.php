@@ -5,6 +5,8 @@ include 'template/footer.php';
 ?>
 
 <script>
+  let resData;
+
     $(document).ready(function() {
         // Request data dari server
         $.ajax({
@@ -17,6 +19,8 @@ include 'template/footer.php';
             success: function(response) {
                 // Bersihkan daftar sebelumnya
                 $('#datamasyarakatList').empty();
+                resData = response.data
+
                 $.each(response.data, function(index, item) {
                     // Tambahkan data ke tabel
                     $('#datamasyarakatList').append(
@@ -40,6 +44,37 @@ include 'template/footer.php';
             }
         });
     });
+
+     
+  // Fungsi render data ke <ul>
+  function rendermasyarakat(dataToRender) {
+    $('#datamasyarakatList').empty();
+    for (let i = 0; i < dataToRender.length; i++) {
+      // Tambahkan data ke tabel
+      $('#datamasyarakatList').append(
+        `<tr>
+        <td style="width: 20px; text-align: center;">${i + 1}</td>
+        <td style="text-align: center;">${dataToRender[i].attributes.nama}</td>
+        <td style="text-align: center;">${dataToRender[i].attributes.nik}</td>
+        <td style="text-align: center;">${dataToRender[i].attributes.kriteria_penghasilan.data.attributes.kriteria}</td>
+        <td style="text-align: center;">${dataToRender[i].attributes.kriteria_rumah.data.attributes.kondisi_rumah}</td>
+        <td style="text-align: center;">
+            <a href="datamasyarakatedit.php?id=${dataToRender[i].id}" class="btn btn-warning btn-sm">Edit</a>
+            <button class="btn btn-danger btn-sm btn-delete" data-id="${dataToRender[i].id}">Hapus</button>
+        </td>
+    </tr>`)
+    }
+  }
+  
+  $('#searchmasyarakat').on('input', function() {
+     let search = $('#searchmasyarakat').val()
+     let keyword = search.toLowerCase();
+      let filtered = resData.filter(item =>
+        item.attributes.nama.toLowerCase().includes(keyword) || item.attributes.nik.toLowerCase().includes(keyword)
+      );
+      rendermasyarakat(filtered);
+  });
+
 </script>
 <script>
     $(document).on('click', '.btn-delete', function () {

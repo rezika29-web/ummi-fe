@@ -448,6 +448,7 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
                     <div class="card shadow mb-4">
                          <div class="card-header py-3" style=" display:flex; align-items: center; justify-content: space-between;">
                             <h6 class="m-0 font-weight-bold text-primary">Data Pribadi</h6>
+                            <div id="datapersonal"></div>
                         </div>
                         <div class="card-body">
                             <div class="row g-3">
@@ -491,6 +492,14 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
                                     <label for="disability" class="form-label">Foto Tampak Belakang</label>
                                     <div id="fototampakbelakang"></div>
                                 </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="disability" class="form-label">KK</label>
+                                    <div id="kk"></div>
+                                </div>
+                                <div class="col-md-6" style=" margin-bottom: 20px;">
+                                    <label for="disability" class="form-label">SKTM</label>
+                                    <div id="sktm"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -527,8 +536,21 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
             Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
         success: function(response) {
+            if(response.data[0] == undefined){
+                $('#datapersonal').append(
+                    `<a href="datamasyarakatadd.php" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Tambah data
+                    </a>`
+                );
+            }else{
+                $('#datapersonal').append(
+                    `<a href="datamasyarakatedit.php?id=${response.data[0].id}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                        <i class="fas fa-plus fa-sm text-white-50"></i> Edit data
+                    </a>`
+                );
+            }
             console.log('====================================');
-            console.log("response.data.attributes. ", response.data[0]);
+            console.log("response.data[0].attributes ", response.data[0].attributes);
             console.log('====================================');
             $('#nama').val(response.data[0].attributes.nama);
             $('#nik').val(response.data[0].attributes.nik);
@@ -540,10 +562,16 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
             $('#disability').val(response.data[0].attributes.kriteria_disability.data.attributes.disabilitas);
             
             $('#fototampakdepan').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_depan.data.attributes.url}" width=200 hright=200/>`
+                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_depan.data.attributes.url}" width=50% height=50%/>`
             );
-                $('#fototampakbelakang').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_belakang.data.attributes.url}" width=200 hright=200/>`
+            $('#fototampakbelakang').append(
+                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_belakang.data.attributes.url}" width=50% height=50%/>`
+            );
+             $('#kk').append(
+                `<image src="http://localhost:1337${response.data[0].attributes.kk.data.attributes.url}" width=50% height=50%/>`
+            );
+            $('#sktm').append(
+                `<image src="http://localhost:1337${response.data[0].attributes.sktm.data.attributes.url}" width=50% height=50%/>`
             );
         },
         error: function(error) {

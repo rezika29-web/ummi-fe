@@ -65,7 +65,13 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <div style=" display: flex;
+                                                justify-content: flex-end; /* Geser ke kanan */
+                                                padding: 10px;">
+                                        <input type="text" id="search" placeholder="Cari nama/status..." style="width:200px;">
+                                    </div>
+                                    
+                                    <table class="table table-bordered" width="100%" cellspacing="0">
                                         <thead>
                                             <tr>
                                                 <th style="width: 50px; text-align: center;">No</th>
