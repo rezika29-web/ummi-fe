@@ -1,3 +1,13 @@
+<?php
+    if (isset($_SESSION['user_id'])) {
+        $dataMasyarakartId = $_SESSION['user_id'];
+        $dataMasyarakartStatus = $_SESSION['status'];
+        $dataMasyarakartUsername = $_SESSION['username'];
+    } else {
+        echo "ID tidak ditemukan!";
+    }
+?>
+
 
   <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
@@ -94,14 +104,25 @@
                     </div>
                     <div class="mb-3">
                         <label for="image1" class="form-label">Foto Tampak Depan</label>
-                        <input class="form-control" type="file" name="image1">
+                        <input class="form-control" type="file" id="image1" name="image1" accept="image/*">
+                        <img id="previewimage1" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
                     </div>
                     <div class="mb-3">
-                        <label for="iamge2" class="form-label">Foto Tampak Belakang</label>
-                        <input class="form-control" type="file" name="image2">
+                        <label for="image2" class="form-label">Foto Tampak Belakang</label>
+                        <input class="form-control" type="file" id="image2" name="image2" accept="image/*">
+                        <img id="previewimage2" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
                     </div>
-                    <!-- <button type="submit" id="submitBtn">Save</button> -->
-                       <button type="submit">Save</button>
+                    <div class="mb-3">
+                        <label for="kk" class="form-label">Foto KK</label>
+                        <input class="form-control" type="file" id="kk" accept="image/*" name="kk">
+                        <img id="preview" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
+                    </div>
+                     <div class="mb-3">
+                        <label for="kk" class="form-label">Foto SKTM</label>
+                        <input class="form-control" type="file" id="sktm" accept="image/*" name="sktm">
+                        <img id="previewsktm" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
+                    </div>
+                    <button type="submit">Save</button>
                     </form>
                 </div>
             </div>
@@ -109,12 +130,47 @@
         <!-- /.container-fluid -->
     </div>
     <!-- End of Main Content -->
+    <script>
+        $(document).ready(function() {
+            function renderImage(file, params) {
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        $(`#${params}`).attr('src', e.target.result).show();
+                    };
+                    return reader.readAsDataURL(file);
+                }
+            }
+
+            $('#kk').change(function() {
+                const file = this.files[0];
+                renderImage(file, 'preview')
+            });
+
+            $('#image2').change(function() {
+                const file = this.files[0];
+                renderImage(file, 'previewimage2')
+            });
+
+            $('#image1').change(function() {
+                const file = this.files[0];
+                renderImage(file, 'previewimage1')
+            });
+
+            $('#sktm').change(function() {
+                const file = this.files[0];
+                renderImage(file, 'previewsktm')
+            });
+        });
+    </script>
 
     <script>
         $(document).ready(function () {
+            
             document.getElementById('formContent').addEventListener('submit', async function(e) {
-            e.preventDefault();
-
+                e.preventDefault();
+            
+            const dataMasyarakartStatus = <?= json_encode($dataMasyarakartStatus); ?>;
             const form = e.target;
             const formData = new FormData();
 
@@ -130,13 +186,16 @@
             let disability = form.disability.value
             let image1 = form.image1.files[0]
             let image2 = form.image2.files[0]
+            let kk = form.kk.files[0]
+            let sktm = form.sktm.files[0]
 
             var idUser = <?= $_SESSION['user_id']; ?>;
             // Tambahkan data ke FormData
             formData.append('data', JSON.stringify({ "users_permissions_user" : username, "nik": nik, "nama": nama, "kriteria_penghasilan": penghasilan, "kriteria_rumah": rumah, "kriteria_tanggungan": tanggungan, "kriteria_lansia": lansia, "kriteria_ibu_hamil": ibuhamil, "kriteria_disability": disability }));
             formData.append('files.foto_tampak_depan', image1);
             formData.append('files.foto_tampak_belakang', image2);
-
+            formData.append('files.kk', kk);
+            formData.append('files.sktm', sktm);
             try {
                 let res = await fetch('http://localhost:1337/api/data-masyarakats', {
                 method: 'POST',
@@ -148,7 +207,11 @@
 
                 let result = await res.json();
                 alert('Data Masyarakat berhasil ditambahkan!');
-                window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
+                if(dataMasyarakartStatus == "Masyarakat"){
+                    window.location.href = "http://localhost/ummi/fe/dashboard.php";
+                }else{
+                    window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                }            
             } catch (err) {
                 alert('Data Masyarakat gagal ditambahkan!');
             }
@@ -163,32 +226,40 @@
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
+        const dataMasyarakartId = <?= json_encode($dataMasyarakartId); ?>;
+        const dataMasyarakartStatus = <?= json_encode($dataMasyarakartStatus); ?>;
+        const dataMasyarakartUsername = <?= json_encode($dataMasyarakartUsername); ?>;
 
-         // Request data dari server
-        $.ajax({
-            url: 'http://localhost:1337/api/users', // Ganti dengan URL server Anda
-            method: 'GET',
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('token'), // Tambahkan Bearer Token
-            },
-            dataType: 'json',
-            success: function(data) {
-                let resData = data;
-                $('#username').append(
-                    `<option value="">Select Username...</option>`
-                    ); 
-                $.each(resData, function(i, dt) {
-                // Looping data dan tambahkan ke elemen HTML
+        if(dataMasyarakartStatus == "Masyarakat"){
+            $('#username').append(
+                `<option value="` + dataMasyarakartId + `">` + dataMasyarakartUsername + `</option>`
+            );
+        }else{
+            $.ajax({
+                url: 'http://localhost:1337/api/users', // Ganti dengan URL server Anda
+                method: 'GET',
+                headers: {
+                    Authorization: 'Bearer ' + localStorage.getItem('token'), // Tambahkan Bearer Token
+                },
+                dataType: 'json',
+                success: function(data) {
+                    let resData = data;
                     $('#username').append(
-                    `<option value="` + dt.id + `">` + dt.username + `</option>`
-                    ); 
-                })                   
-            },
-            error: function(error) {
-                alert('Gagal memuat data!');
-                console.error(error);
-            }
-        });
+                        `<option value="">Select Username...</option>`
+                        );
+                    $.each(resData, function(i, dt) {
+                    // Looping data dan tambahkan ke elemen HTML
+                        $('#username').append(
+                        `<option value="` + dt.id + `">` + dt.username + `</option>`
+                        );
+                    })
+                },
+                error: function(error) {
+                    alert('Gagal memuat data!');
+                    console.error(error);
+                }
+            });
+        }
 
         // Request data dari server
         $.ajax({
