@@ -8,7 +8,7 @@ include 'template/footer.php';
     $(document).ready(function() {
         // Request data dari server
         $.ajax({
-            url: 'http://localhost:1337/api/data-normalisasis?populate=*', // URL API Anda
+            url: 'http://localhost:1337/api/data-normalisasis?populate=*&sort=data_masyarakat.nama:asc', // URL API Anda
             method: 'GET',
             dataType: 'json',
             headers: {

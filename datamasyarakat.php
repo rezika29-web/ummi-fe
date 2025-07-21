@@ -10,7 +10,7 @@ include 'template/footer.php';
     $(document).ready(function() {
         // Request data dari server
         $.ajax({
-            url: 'http://localhost:1337/api/data-masyarakats?populate=*&pagination[limit]=100', // URL API Anda
+            url: 'http://localhost:1337/api/data-masyarakats?populate=*&pagination[limit]=200&sort=nama:asc', // URL API Anda
             method: 'GET',
             dataType: 'json',
             headers: {
