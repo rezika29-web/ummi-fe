@@ -65,6 +65,8 @@
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <button id="cetakSemua" style="border-radius: 15px; background-color: greenyellow; font-family: bold;">Cetak PDF</button>
+
                                     <div style=" display: flex;
                                                 justify-content: flex-end; /* Geser ke kanan */
                                                 padding: 10px;">
@@ -133,3 +135,43 @@
 </div>
 
 <!-- End of Content Wrapper -->
+ <script>
+    $('#cetakSemua').on('click', function () {
+      const urls = [
+        'cetak.php?filter=layak',
+        'cetak.php?filter=tidak',
+        'cetak.php?filter=all'
+      ];
+
+       $.ajax({
+            url: 'http://localhost:1337/api/data-perengkingans?populate=*', 
+            method: 'GET',
+            dataType: 'json',
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('token'), 
+            },
+            success: function(response) {
+                for (let i = 0; i < urls.length; i++) {
+                    setTimeout(() => {
+                        const json = JSON.stringify(response.data);
+                        const form = $('<form>', {
+                            method: 'POST',
+                            action: urls[i],
+                            target: '_blank' 
+                        }).append($('<input>', {
+                            type: 'hidden',
+                            name: 'jsonData',
+                            value: json
+                        }));
+
+                        form.appendTo('body').submit().remove();
+                    }, i * 1000); 
+                }
+            },
+            error: function(error) {
+                alert('Gagal memuat data!');
+                console.error(error);
+            }
+        });
+    });
+  </script>
