@@ -70,7 +70,7 @@
                                     <div style=" display: flex;
                                                 justify-content: flex-end; /* Geser ke kanan */
                                                 padding: 10px;">
-                                        <input type="text" id="search" placeholder="Cari nama/status..." style="width:200px;">
+                                        <input type="text" id="search" placeholder="Cari nama..." style="width:200px;">
                                     </div>
                                     
                                     <table class="table table-bordered" width="100%" cellspacing="0">
