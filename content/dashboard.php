@@ -562,18 +562,27 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
             $('#ibuhamil').val(response.data[0].attributes.kriteria_ibu_hamil.data.attributes.kriteria_ibu_hamil);
             $('#disability').val(response.data[0].attributes.kriteria_disability.data.attributes.disabilitas);
             
-            $('#fototampakdepan').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_depan.data.attributes.url}" width=50% height=50%/>`
-            );
-            $('#fototampakbelakang').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_belakang.data.attributes.url}" width=50% height=50%/>`
-            );
-             $('#kk').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.kk.data.attributes.url}" width=50% height=50%/>`
-            );
-            $('#sktm').append(
-                `<image src="http://localhost:1337${response.data[0].attributes.sktm.data.attributes.url}" width=50% height=50%/>`
-            );
+            
+            if(response.data[0].attributes.foto_tampak_depan.data != null){
+                $('#fototampakdepan').append(
+                    `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_depan.data.attributes.url}" width=50% height=50%/>`
+                );
+            }
+            if(response.data[0].attributes.foto_tampak_belakang.data != null){
+                $('#fototampakbelakang').append(
+                    `<image src="http://localhost:1337${response.data[0].attributes.foto_tampak_belakang.data.attributes.url}" width=50% height=50%/>`
+                );
+            }
+            if(response.data[0].attributes.kk.data != null){
+                $('#kk').append(
+                   `<image src="http://localhost:1337${response.data[0].attributes.kk.data.attributes.url}" width=50% height=50%/>`
+               );
+            }
+            if(response.data[0].attributes.sktm.data != null){
+                $('#sktm').append(
+                    `<image src="http://localhost:1337${response.data[0].attributes.sktm.data.attributes.url}" width=50% height=50%/>`
+                );
+            }
         },
         error: function(error) {
             alert('Gagal mengambil data user!');

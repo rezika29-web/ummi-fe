@@ -131,7 +131,6 @@
         </div>
     </footer>
     <!-- End of Footer -->
-
 </div>
 
 <!-- End of Content Wrapper -->
@@ -165,7 +164,7 @@
                         }));
 
                         form.appendTo('body').submit().remove();
-                    }, i * 1000); 
+                    }, i * 2000);
                 }
             },
             error: function(error) {

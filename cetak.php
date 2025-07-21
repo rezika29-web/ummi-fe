@@ -61,5 +61,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 $filename = "laporan_pkh_" . $filter . ".pdf";
-$dompdf->stream($filename, ["Attachment" => false]);
+$dompdf->stream($filename, ["Attachment" => true]);
 ?>
