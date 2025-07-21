@@ -208,9 +208,9 @@
                 let result = await res.json();
                 alert('Data Masyarakat berhasil ditambahkan!');
                 if(dataMasyarakartStatus == "Masyarakat"){
-                    window.location.href = "http://localhost/ummi/fe/dashboard.php";
+                    window.location.href = "http://localhost/Project/ummi/ummi-fe/dashboard.php";
                 }else{
-                    window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                    window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
                 }            
             } catch (err) {
                 alert('Data Masyarakat gagal ditambahkan!');

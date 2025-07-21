@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 
 </head>
 
-<body class="bg-gradient-primary">
+<body style="background-color: #ff0000;">
 
     <div class="container">
 
@@ -66,9 +66,6 @@ if (isset($_SESSION['user_id'])) {
                                         <button id="loginButton" class="btn btn-primary btn-user btn-block">Login</button>
                                         </div>
                                     <hr>
-                                    <div class="text-center">
-                                        <a class="small" href="register.php">Create an Account!</a>
-                                    </div>
                                 </div>
                             </div>
                         </div>

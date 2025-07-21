@@ -138,8 +138,8 @@
  <script>
     $('#cetakSemua').on('click', function () {
       const urls = [
-        'cetak.php?filter=layak',
         'cetak.php?filter=tidak',
+        'cetak.php?filter=layak',
         'cetak.php?filter=all'
       ];
 

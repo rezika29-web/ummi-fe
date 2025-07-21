@@ -543,6 +543,9 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
                     </a>`
                 );
             }else{
+                console.log('====================================');
+                console.log("http://localhost:1337"+response.data[0].attributes.kk.data.attributes.url);
+                console.log('====================================');
                 $('#datapersonal').append(
                     `<a href="datamasyarakatedit.php?id=${response.data[0].id}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                         <i class="fas fa-plus fa-sm text-white-50"></i> Edit data

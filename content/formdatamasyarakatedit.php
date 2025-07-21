@@ -264,9 +264,9 @@ if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
                 let result = await res.json();
                 alert('Data Masyarakat berhasil diupdate!');
                 if(dataMasyarakartStatus == "Masyarakat"){
-                    window.location.href = "http://localhost/ummi/fe/dashboard.php";
+                    window.location.href = "http://localhost/Project/ummi/ummi-fe/dashboard.php";
                 }else{
-                    window.location.href = "http://localhost/ummi/fe/datamasyarakat.php";
+                    window.location.href = "http://localhost/Project/ummi/ummi-fe/datamasyarakat.php";
                 }            
             } catch (err) {
                 alert('Data Masyarakat gagal diupdate!');

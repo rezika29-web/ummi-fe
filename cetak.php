@@ -11,6 +11,7 @@ $filteredData = array_filter($data, function($item) use ($filter) {
   if ($filter == 'tidak') return strtolower($item['attributes']['status']) == 'tidak layak';
   return true;
 });
+
 ob_start();
 ?>
 
@@ -60,5 +61,5 @@ $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 
 $filename = "laporan_pkh_" . $filter . ".pdf";
-$dompdf->stream($filename, ["Attachment" => true]);
+$dompdf->stream($filename, ["Attachment" => false]);
 ?>

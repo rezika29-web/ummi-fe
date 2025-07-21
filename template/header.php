@@ -79,7 +79,7 @@ if (!isset($_SESSION['user_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="datauser.php">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Data User <?=$_SESSION['status'];?></span></a>
+                    <span>Data User</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="datamasyarakat.php">
