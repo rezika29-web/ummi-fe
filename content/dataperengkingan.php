@@ -144,7 +144,7 @@
       ];
 
        $.ajax({
-            url: 'http://localhost:1337/api/data-perengkingans?populate=*', 
+            url: 'http://localhost:1337/api/data-perengkingans?populate=*&sort=data_masyarakat.nama:asc', 
             method: 'GET',
             dataType: 'json',
             headers: {

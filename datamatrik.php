@@ -8,7 +8,7 @@ include 'template/footer.php';
     $(document).ready(function() {
         // Request data dari server
         $.ajax({
-            url: 'http://localhost:1337/api/data-matriks?populate=*', // URL API Anda
+            url: 'http://localhost:1337/api/data-matriks?populate=*&sort=users_permissions_user.username:asc', // URL API Anda
             method: 'GET',
             dataType: 'json',
             headers: {

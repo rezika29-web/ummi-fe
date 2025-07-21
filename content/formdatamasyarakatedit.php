@@ -121,7 +121,7 @@ if (isset($_GET['id']) && isset($_SESSION['user_id'])) {
                         <img id="preview" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
                     </div>
                     <div class="mb-3">
-                        <label for="sktm" class="form-label">SKTM</label>
+                        <label for="sktm" class="form-label">Foto Surat Keterangan Tidak Mampu</label>
                         <div id="sktmFile"></div>
                         <input class="form-control" type="file" id="sktm" accept="image/*" name="sktm">
                         Gambar Edit<br />

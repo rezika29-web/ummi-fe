@@ -493,11 +493,11 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
                                     <div id="fototampakbelakang"></div>
                                 </div>
                                 <div class="col-md-6" style=" margin-bottom: 20px;">
-                                    <label for="disability" class="form-label">KK</label>
+                                    <label for="disability" class="form-label">Foto KK</label>
                                     <div id="kk"></div>
                                 </div>
                                 <div class="col-md-6" style=" margin-bottom: 20px;">
-                                    <label for="disability" class="form-label">SKTM</label>
+                                    <label for="disability" class="form-label">Foto Surat Keterangan Tidak Mampu</label>
                                     <div id="sktm"></div>
                                 </div>
                             </div>
@@ -549,9 +549,7 @@ if(strtolower($_SESSION['status']) != "masyarakat" ){
                     </a>`
                 );
             }
-            console.log('====================================');
-            console.log("response.data[0].attributes ", response.data[0].attributes);
-            console.log('====================================');
+            
             $('#nama').val(response.data[0].attributes.nama);
             $('#nik').val(response.data[0].attributes.nik);
             $('#penghasilan').val(response.data[0].attributes.kriteria_penghasilan.data.attributes.kriteria);

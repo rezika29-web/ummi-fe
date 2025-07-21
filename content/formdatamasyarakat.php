@@ -118,7 +118,7 @@
                         <img id="preview" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
                     </div>
                      <div class="mb-3">
-                        <label for="kk" class="form-label">Foto SKTM</label>
+                        <label for="kk" class="form-label">Foto Surat Keterangan Tidak Mampu</label>
                         <input class="form-control" type="file" id="sktm" accept="image/*" name="sktm">
                         <img id="previewsktm" class="img-thumbnail" src="#" alt="Preview Gambar" style="display: none;">
                     </div>
