@@ -85,7 +85,8 @@
                                                 <th style="text-align: center;">Ibu Hamil</th>
                                                 <th style="text-align: center;">Disabilitas</th>
                                                 <th style="text-align: center;">Nilai Akhir</th>
-                                                <th style="text-align: center;">Status</th>
+                                                <th style="text-align: center;">Status Penerima</th>
+                                                <th style="text-align: center;">Rengking</th>
                                                 <th style="text-align: center;">Aksi</th>
                                             </tr>
                                         </thead>
@@ -100,7 +101,8 @@
                                                 <th style="text-align: center;">Ibu Hamil</th>
                                                 <th style="text-align: center;">Disabilitas</th>
                                                 <th style="text-align: center;">Nilai Akhir</th>
-                                                <th style="text-align: center;">Status</th>
+                                                <th style="text-align: center;">Status Penerima</th>
+                                                <th style="text-align: center;">Rengking</th>
                                                 <th style="text-align: center;">Aksi</th>
                                             </tr>
                                         </tfoot>

@@ -60,7 +60,7 @@ if (!isset($_SESSION['user_id'])) {
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Dashboard KMS</div>
+                <div class="sidebar-brand-text mx-3">Dashboard SPK-PKH</div>
             </a>
 
             <!-- Divider -->
@@ -78,7 +78,7 @@ if (!isset($_SESSION['user_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="datauser.php">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Data User <?=$_SESSION['status'];?></span></a>
+                    <span>Data User</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="datamasyarakat.php">
@@ -109,7 +109,7 @@ if (!isset($_SESSION['user_id'])) {
             <li class="nav-item">
                 <a class="nav-link" href="status.php">
                     <i class="fas fa-fw fa-user"></i>
-                    <span>Status</span>
+                    <span>Status Penerima</span>
                 </a>
             </li>
             <?php
